@@ -50,12 +50,40 @@ const usuarios = [
 ];
 
 const reservables = [
-    new Reservable("Lo de Lita", "Restaurant", 20, 1),
+    new Reservable("Lo de Lita", "Restaurant", 20, 02052022, 1),
     new Reservable("Nirvana live Unpluged", "Recital", 1500, 11102022, 2),
-    new Reservable("El club de la papa frita", "Restaurant", 50, 3),
+    new Reservable("El club de la papa frita", "Restaurant", 50, 03112022, 3),
     new Reservable("El Row", "Fiesta Electonica", 800, 05112022, 4),
+    new Reservable("Stand up", "Teatro", 200, 05122022, 5),
 ];
 
 const reservas = [];
+
+//Declaración de funciones
+
+function chequeoLogin(usuarioIngresado,contraseñaIngresada){
+    let resultadoUsuario = usuarios.some((usuario)=>usuario.userId==usuarioIngresado);
+    let resultadoContraseña = usuarios.some((usuario)=>usuario.contraseña==contraseñaIngresada);
+    if(resultadoUsuario==true && resultadoContraseña==true){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+// Main
+
+for (let i = 2; i>=0; i--){
+    let usuario = prompt("Ingresá tu usuario:");
+    let contraseña = prompt("Inggresá tu contraseña");
+    if(chequeoLogin(usuario,contraseña)==true){
+        alert("Ingreso aceptado");
+        break
+    } else if(i>0){
+        alert("Usuario o contraseña incorrectos, te quedan "+i+" intentos");
+    } else {
+        alert("Ingreso fallido, te quedaste sin intentos");
+    }
+}
 
 
