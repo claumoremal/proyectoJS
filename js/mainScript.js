@@ -91,7 +91,8 @@ function reservar(nombreReservable, nombreUsuario, apellidoUsuario, fecha, hora,
 let continuar = true;
 
 while (continuar) {
-    let opcion = parseInt(prompt("Bienvenido al sistema de reservas, que desea hacer: \n 1. Login \n 2. Registrarse\n 3. Registrar Comercio\n 4. Salir"));
+    let login = document.getElementById("btnLogin");
+    console.log(login);
     switch (opcion) {
         case 1:
             for (let i = 2; i >= 0; i--) {
