@@ -23,12 +23,14 @@ class Reservable{
 
     generadorId(array){
         this.id = array.length;
-    }
+    }   
+
 }
 
 class Reserva{
-    constructor(idReserva, nombreUsuario, apellidoUsuario, fecha, hora, cantidadPersonas){
+    constructor(idReserva, nombreReservable, nombreUsuario, apellidoUsuario, fecha, hora, cantidadPersonas){
         this.idReserva = parseInt(idReserva);
+        this.nombreReservable = nombreReservable;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
         this.fecha = parseInt(fecha);
@@ -72,21 +74,44 @@ function chequeoLogin(usuarioIngresado,contraseñaIngresada){
     }
 }
 
+function mostrarReservables(array){
+    let dato = " ";
+    array.forEach(elemento => {dato += "\n Nombre: " + elemento.nombre + "\n Tipo: " + elemento.tipo + "\n Cupos: " + elemento.cupos + "\n Fecha: " + elemento.fecha});
+    return dato;
+}
+
+function reservar(nombreReservable, nombreUsuario, apellidoUsuario, fecha, hora, cantidadPersonas){
+
+
+}
 
 // ------------------------------------ MAIN ------------------------------------------------
 
-//Login
+//Login y menú principal
 let continuar = true;
 
 while (continuar) {
     let opcion = parseInt(prompt("Bienvenido al sistema de reservas, que desea hacer: \n 1. Login \n 2. Registrarse\n 3. Registrar Comercio\n 4. Salir"));
-    switch(opcion){
+    switch (opcion) {
         case 1:
             for (let i = 2; i >= 0; i--) {
                 let usuario = prompt("Ingresá tu usuario:");
                 let contraseña = prompt("Ingresá tu contraseña");
                 if (chequeoLogin(usuario, contraseña) === true) {
                     alert("Ingreso aceptado");
+                    // Menú de reservas
+                    let opcionReservas = parseInt(prompt("Menú de reservas\n 1. Reservar\n 2. Cancelar reserva"));
+                    switch (opcionReservas) {
+                        case 1:
+                            alert(mostrarReservables(reservables));
+                            break;
+                        case 2:
+
+                            break;
+                        default:
+                            alert("Opción ingresada incorrecta")
+                            break;
+                    }
                     break
                 } else if (i > 0) {
                     alert("Usuario o contraseña incorrectos, te quedan " + i + " intentos");
@@ -96,19 +121,19 @@ while (continuar) {
             }
             break;
         case 2:
-                let ingresoUsuario = prompt("Ingresa tus datos (Nombre, Apellido, Mail, Nombre de usuario, Contraseña, Edad) separados con coma (,)");
-                let datosUsuario = ingresoUsuario.split(",");                
-                const nuevoUsuario = new Usuario(datosUsuario[0], datosUsuario[1], datosUsuario[2], datosUsuario[3], datosUsuario[4], datosUsuario[5],);
-                usuarios.push(nuevoUsuario);
-                console.log(usuarios);
+            let ingresoUsuario = prompt("Ingresa tus datos (Nombre, Apellido, Mail, Nombre de usuario, Contraseña, Edad) separados con coma (,)");
+            let datosUsuario = ingresoUsuario.split(",");
+            const nuevoUsuario = new Usuario(datosUsuario[0], datosUsuario[1], datosUsuario[2], datosUsuario[3], datosUsuario[4], datosUsuario[5],);
+            usuarios.push(nuevoUsuario);
+            console.log(usuarios);
             break;
         case 3:
-                let ingresoComercio = prompt("Ingresa los datos (Nombre, Tipo, Cupos, Fecha) separados con coma (,)");
-                let datosComercio = ingresoComercio.split(",");
-                const nuevoComercio = new Reservable(datosComercio[0], datosComercio[1], datosComercio[2], datosComercio[3],);
-                reservables.push(nuevoComercio);
-                nuevoComercio.generadorId(reservables);
-                console.log(reservables);
+            let ingresoComercio = prompt("Ingresa los datos (Nombre, Tipo, Cupos, Fecha) separados con coma (,)");
+            let datosComercio = ingresoComercio.split(",");
+            const nuevoComercio = new Reservable(datosComercio[0], datosComercio[1], datosComercio[2], datosComercio[3],);
+            reservables.push(nuevoComercio);
+            nuevoComercio.generadorId(reservables);
+            console.log(reservables);
 
         case 4:
             continuar = false;
@@ -117,14 +142,9 @@ while (continuar) {
             alert("La opción ingresada no es correcta");
             break;
     }
-    
+
 }
 
-/* continuar = true;
-
-while(continuar == true){
-
-} */
 
 
 
