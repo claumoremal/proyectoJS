@@ -88,11 +88,11 @@ function reservar(nombreReservable, nombreUsuario, apellidoUsuario, fecha, hora,
 // ------------------------------------ MAIN ------------------------------------------------
 
 //Login y menú principal
-let continuar = true;
 
-while (continuar) {
-    let login = document.getElementById("btnLogin");
-    console.log(login);
+let continuar = true;
+const btnLogin = document.querySelector("#loginName");
+console.log(btnLogin.placeholder);
+/* while (continuar) {
     switch (opcion) {
         case 1:
             for (let i = 2; i >= 0; i--) {
@@ -142,9 +142,9 @@ while (continuar) {
         default:
             alert("La opción ingresada no es correcta");
             break;
-    }
+    } */
 
-}
+
 
 
 
