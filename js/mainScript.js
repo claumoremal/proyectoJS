@@ -13,10 +13,11 @@ class Usuario{
 }
 
 class Reservable{
-    constructor(nombre, tipo, cupos, fecha, id){
+    constructor(nombre, tipo, cupos, precio, fecha, id){
         this.nombre = nombre;
         this.tipo = tipo;
         this.cupos = parseInt(cupos);
+        this.precio = parseInt(precio);
         this.fecha = parseInt(fecha);
         this.id = parseInt(id);
     }
@@ -53,11 +54,11 @@ const usuarios = [
 ];
 
 const reservables = [
-    new Reservable("Lo de Lita", "Restaurant", 20, 02052022, 1),
-    new Reservable("Nirvana live Unpluged", "Recital", 1500, 11102022, 2),
-    new Reservable("El club de la papa frita", "Restaurant", 50, 03112022, 3),
-    new Reservable("El Row", "Fiesta Electonica", 800, 05112022, 4),
-    new Reservable("Stand up", "Teatro", 200, 05122022, 5),
+    new Reservable("Lo de Lita", "Restaurant", 20, 500, 02052022, 1),
+    new Reservable("Nirvana live Unpluged", "Recital", 1500, 5000, 11102022, 2),
+    new Reservable("El club de la papa frita", "Restaurant", 50, 250, 03112022, 3),
+    new Reservable("El Row", "Fiesta Electonica", 800,400, 05112022, 4),
+    new Reservable("Stand up", "Teatro", 200, 1560,05122022, 5),
 ];
 
 const reservas = [];
@@ -87,11 +88,38 @@ function reservar(nombreReservable, nombreUsuario, apellidoUsuario, fecha, hora,
 
 // ------------------------------------ MAIN ------------------------------------------------
 
-//Login y menú principal
+//Login
 
-let continuar = true;
-const btnLogin = document.querySelector("#loginName");
-console.log(btnLogin.placeholder);
+/* let continuar = true;
+
+const loginName = document.querySelector("#loginName");
+loginName.onchange = ()=>{
+    let usuario = loginName.value;
+    console.log(usuario);
+}
+
+const loginPassword = document.getElementById("loginPassword");
+loginPassword.onchange = ()=>{
+    let password = loginPassword.value;
+    console.log(password);
+} */
+
+/* const btnSubmitLogin = document.querySelector("#btnSubmitLogin");
+btnSubmitLogin.onclick = () => {
+    for (let i = 2; i >= 0; i--) {
+        if (chequeoLogin(usuario, contraseña) === true) {
+            alert("Bienvenid@ " + usuario);
+        } else if (i > 0) {
+            alert("Usuario o contraseña incorrectos, te quedan " + i + " intentos");
+        } else {
+            alert("Ingreso fallido, te quedaste sin intentos");
+        }
+    }
+} */
+
+
+
+
 /* while (continuar) {
     switch (opcion) {
         case 1:
@@ -144,8 +172,34 @@ console.log(btnLogin.placeholder);
             break;
     } */
 
+//Crear cards de Reservables
+contenedorTarjetas = document.getElementById("contenedorTarjetas");
 
-
-
+for (const reservable of reservables) {
+    let card = document.createElement("div");
+    card.id = reservable.id;
+    card.innerHTML = `<div class="col mb-5">
+    <div class="card h-100">
+        <!-- Product image-->
+        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+        <!-- Product details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">${reservable.nombre}</h5>
+                <!-- Product price-->
+                $${reservable.precio}
+            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+            <a id="btnReservar" class="btn btn-outline-dark mt-auto" href="#">Reservar</a>
+            </div>
+        </div>
+    </div>
+</div>`;
+    contenedorTarjetas.append(card);
+}
 
 
